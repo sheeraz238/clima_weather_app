@@ -4,7 +4,6 @@ class Location {
   double? latitude;
   double? longitude;
 
-  //Location({required this.latitude, required this.longitude});
   Future<void> getCurrentLocation() async {
     try {
       Position position = await Geolocator.getCurrentPosition(

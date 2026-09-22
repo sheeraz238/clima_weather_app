@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({required this.locationWeather});
@@ -10,6 +11,32 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = WeatherModel();
+
+  int? temperature;
+  String? weatherIcon;
+  String? cityName;
+  String? weatherMessage;
+
+  void initState() {
+    super.initState();
+
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(dynamic weatherData) {
+    setState(() {
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+
+      var condition = weatherData['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      weatherMessage = weather.getMessage(temperature!);
+
+      cityName = weatherData['name'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +74,15 @@ class _LocationScreenState extends State<LocationScreen> {
                 padding: EdgeInsets.only(left: 15.0),
                 child: Row(
                   children: <Widget>[
-                    Text('32°', style: kTempTextStyle),
-                    Text('☀️', style: kConditionTextStyle),
+                    Text('$temperature°', style: kTempTextStyle),
+                    Text(weatherIcon!, style: kConditionTextStyle),
                   ],
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "$weatherMessage, in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
@@ -67,9 +94,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-// double weatherTemp = decodedData['main']['temp'];
-
-// int weather = decodedData['weather'][0]['id'];
-
-// String weatherCity = decodedData['name'];
