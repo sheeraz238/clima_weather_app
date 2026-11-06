@@ -5,7 +5,6 @@ import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({required this.locationWeather});
-
   final locationWeather;
   @override
   _LocationScreenState createState() => _LocationScreenState();
@@ -21,7 +20,6 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void initState() {
     super.initState();
-
     updateUI(widget.locationWeather);
   }
 
