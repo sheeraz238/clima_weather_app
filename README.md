@@ -17,14 +17,6 @@ A clean weather app built with **Flutter & Dart** that shows live weather for yo
 
 ---
 
-## 📸 Screenshots
-
-| Loading | Weather | Search City |
-|---------|---------|-------------|
-| _add screenshot_ | _add screenshot_ | _add screenshot_ |
-
----
-
 ## 🛠️ Tech Stack
 
 | Tool | Purpose |
